@@ -1,0 +1,44 @@
+.navbar {
+    z-index: 699;
+    position: relative;
+}
+
+
+
+.menu-links li {
+    margin: 0 2rem;
+}
+
+
+.menu-links li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu-links li a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+.logo img {
+    width: 150px;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 40px;
+    cursor: pointer;
+}
+
+
+.menu-right {
+    display: flex;
+    gap: 1.75rem;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+}
+
+.menu-right>div {
+    cursor: pointer;
+}

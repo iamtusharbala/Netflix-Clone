@@ -1,0 +1,24 @@
+.text {
+    position: absolute;
+    top: calc(50%/2);
+    color: white;
+}
+
+.buttons button {
+    margin-right: 1rem;
+}
+
+.backdroptext {
+    margin-left: 3rem;
+    z-index: 799;
+}
+
+
+.description-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+/* .description-buttons buttons {
+    margin: 0 2rem;
+} */
