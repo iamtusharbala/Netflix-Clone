@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from '../../constants/axios'
 import { API_KEY, IMAGE_URL } from '../../constants/constants'
 import './MovieRow.css'
+import ModalComponent from '../Modal/ModalComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
-function MovieRow({ title, endpoint, genres }) {
+function MovieRow({ title, endpoint, genres = '' }) {
     const [poster, setPoster] = useState([]);
     useEffect(() => {
         axios.get(`${endpoint}?api_key=${API_KEY}` + `&${genres}`).then((response) => {
@@ -17,7 +20,8 @@ function MovieRow({ title, endpoint, genres }) {
             <h3>{title}</h3>
             <div className="movie-card card-group card-group-scroll  my-3 ">
                 {poster.map((obj, index) =>
-                    <div className="card border-radius-0" key={index} >
+                    //check if poster path is present and then render on UI
+                    obj.poster_path && <div className="card border-radius-0" key={index} >
                         <img src={`${IMAGE_URL + obj.poster_path}`} className="img-fluid" />
                     </div>
                 )}

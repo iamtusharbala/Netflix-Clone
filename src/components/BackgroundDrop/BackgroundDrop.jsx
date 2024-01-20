@@ -18,7 +18,7 @@ function BackgroundDrop() {
         <div className='backgroundDrop'>
             <div className='background' style={{ backgroundImage: `url(${movie ? IMAGE_URL + movie.backdrop_path : ""})` }}></div>
             <div className="container-fluid">
-                <BackdropText title={movie && movie.original_title} description={movie && movie.overview} />
+                <BackdropText title={movie && movie.original_title} description={movie && movie.overview} movieDetails={movie && movie} />
                 <div className="originals mt-5">
                     <MovieRow title={movie && "Trending Now"} endpoint={trending} />
                     <MovieRow title={movie && "Top Rated Movies"} endpoint={topRated} />

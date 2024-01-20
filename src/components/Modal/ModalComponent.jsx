@@ -1,11 +1,33 @@
-import React from 'react'
-import './ModalComponent.css'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { API_KEY, IMAGE_URL } from '../../constants/constants'
+import './ModalComponent.css'
+import axios from '../../constants/axios';
 
-function ModalComponent({ variant, children }) {
+function ModalComponent({ variant, children, movieDetails }) {
     const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+
+    const [details, setDetails] = useState({})
+    const [imdbDetails, setImdbDetails] = useState({})
+
+    const fetchImdbData = async (passData) => {
+        const response2 = await axios.get(`find/${passData.imdb_id}?external_source=imdb_id&api_key=${API_KEY}`);
+        const detailsFromImdb = response2.data;
+        console.log(detailsFromImdb);
+        setImdbDetails(detailsFromImdb)
+
+    }
+
+
+    useEffect(() => {
+        axios.get(`/movie/${movieDetails.id}?api_key=${API_KEY}`).then((response) => {
+            setDetails(response.data)
+            fetchImdbData(response.data)
+        })
+    }, [])
 
     return (
         <>
@@ -14,26 +36,36 @@ function ModalComponent({ variant, children }) {
             </Button>
 
             <Modal
+                size="lg"
                 show={show}
-                onHide={() => setShow(false)}
-                dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
+                onHide={handleClose}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                        Custom Modal Styling
-                    </Modal.Title>
+
+                <Modal.Header>
+                    {/* <Modal.Title id="example-custom-modal-styling-title">
+                        {movieDetails.title}
+                    </Modal.Title> */}
                 </Modal.Header>
+                <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid' />
                 <Modal.Body>
-                    <p>
-                        Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
-                        commodi aspernatur enim, consectetur. Cumque deleniti temporibus
-                        ipsam atque a dolores quisquam quisquam adipisci possimus
-                        laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
-                        accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
-                        reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
-                        deleniti rem!
-                    </p>
+                    <div className="row">
+                        <div className="col-md-8">
+                            <div className="title fs-2 my-2">
+                                {movieDetails.title}
+                            </div>
+                            <div className="year-details">
+                                <p>{details.release_date}</p>
+                            </div>
+                            <p>
+                                {movieDetails.overview}
+                            </p>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="title">
+                                <p>Cast: Tushar Balakrishnan</p>
+                            </div>
+                        </div>
+                    </div>
                 </Modal.Body>
             </Modal>
         </>

@@ -1,0 +1,16 @@
+.modal-body,
+.modal-header {
+    padding: 0;
+    border: 0;
+}
+
+.modal-content {
+    border-radius: 0;
+}
+
+
+.modal-body {
+    padding: 2rem;
+    background-color: #111;
+    color: white;
+}
