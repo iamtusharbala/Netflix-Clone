@@ -46,7 +46,7 @@ function ModalComponent({ variant, children, movieDetails }) {
                         {movieDetails.title}
                     </Modal.Title> */}
                 </Modal.Header>
-                <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid' />
+                <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid poster' />
                 <Modal.Body>
                     <div className="row">
                         <div className="col-md-8">
