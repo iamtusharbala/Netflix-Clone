@@ -5,6 +5,8 @@ import Modal from 'react-bootstrap/Modal';
 import { API_KEY, IMAGE_URL } from '../../constants/constants'
 import './ModalComponent.css'
 import axios from '../../constants/axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 function ModalComponent({ variant, children, movieDetails }) {
     const [show, setShow] = useState(false);
@@ -46,7 +48,12 @@ function ModalComponent({ variant, children, movieDetails }) {
                         {movieDetails.title}
                     </Modal.Title> */}
                 </Modal.Header>
-                <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid poster' />
+                <div className="image-header">
+                    <div className="image">
+                        <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid poster' />
+                        <button type="button" className="btn btn-light btn-lg"><FontAwesomeIcon icon={faPlay} className='px-3' />Play</button>
+                    </div>
+                </div>
                 <Modal.Body>
                     <div className="row">
                         <div className="col-md-8">
