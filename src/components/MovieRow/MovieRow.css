@@ -1,6 +1,8 @@
 .movierow {
     color: white;
-    margin-left: 6rem;
+    margin-left: 3rem;
+    min-height: 100%;
+    z-index: 1
 }
 
 .movie-card {
@@ -11,25 +13,27 @@
 
 
 .card {
+    height: 100%;
     border: 0;
     cursor: pointer;
     transition: all 0.3s ease-in;
 }
 
 .card:hover {
-    z-index: 999;
-    transform: scale(1.2);
+    transform: scale3d(1.2, 1.2, 2);
 }
 
 
 .card img {
-    background-size: contain;
+    background-size: cover;
+    min-height: 18rem;
 }
 
 .card-group.card-group-scroll {
     overflow-x: scroll;
     flex-wrap: nowrap;
     overflow-y: hidden;
+    align-items: baseline;
 }
 
 .card-group.card-group-scroll::-webkit-scrollbar {

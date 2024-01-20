@@ -1,8 +1,12 @@
 export const topRated = 'movie/top_rated';
 export const popularTV = 'tv/popular';
+export const popularMovies = 'person/popular';
 export const genresUrl = 'discover/movie';
 export const actionMovies = 'with_genres=28';
 export const sciFiMovies = 'with_genres=878';
 export const thrillerMovies = 'with_genres=53';
 export const horrorMovies = 'with_genres=27';
 export const fantasyMovies = 'with_genres=14';
+export const harryPotterMovies = 'search/movie?query=harry%20potter&include_adult=false&language=en-US&page=1';
+export const searchMovies = 'search/movie';
+export const trending = 'trending/movie/day'

@@ -8,6 +8,7 @@ function MovieRow({ title, endpoint, genres }) {
     useEffect(() => {
         axios.get(`${endpoint}?api_key=${API_KEY}` + `&${genres}`).then((response) => {
             // console.log(response.data.results);
+            console.log(`${endpoint}?api_key=${API_KEY}` + `&${genres}`);
             setPoster(response.data.results)
         })
     }, [])
