@@ -4,7 +4,7 @@ import BackdropText from '../BackdropText/BackdropText'
 import MovieRow from '../MovieRow/MovieRow'
 import axios from '../../constants/axios'
 import { API_KEY, IMAGE_URL } from '../../constants/constants'
-import { popularTV, topRated } from '../../constants/urls';
+import { actionMovies, fantasyMovies, genresUrl, horrorMovies, popularTV, sciFiMovies, thrillerMovies, topRated } from '../../constants/urls';
 
 function BackgroundDrop() {
     const [movie, setMovie] = useState();
@@ -20,9 +20,13 @@ function BackgroundDrop() {
             <div className="container-fluid">
                 <BackdropText title={movie && movie.original_title} description={movie && movie.overview} />
                 <div className="originals mt-5">
-                    <MovieRow title="Top Rated Movies" endpoint={topRated} />
-                    <MovieRow title="Popular TV Shows" endpoint={popularTV} />
-                    {/* <MovieRow title="Action Movies" endpoint={actionMovies} /> */}
+                    <MovieRow title={movie && "Top Rated Movies"} endpoint={topRated} />
+                    <MovieRow title={movie && "Popular TV Shows"} endpoint={popularTV} />
+                    <MovieRow title={movie && "Action Movies"} endpoint={genresUrl} genres={actionMovies} />
+                    <MovieRow title={movie && "Sci-Fi Movies"} endpoint={genresUrl} genres={sciFiMovies} />
+                    <MovieRow title={movie && "Thriller Movies"} endpoint={genresUrl} genres={thrillerMovies} />
+                    <MovieRow title={movie && "Horror Movies"} endpoint={genresUrl} genres={horrorMovies} />
+                    <MovieRow title={movie && "Fantasy Movies"} endpoint={genresUrl} genres={fantasyMovies} />
                 </div>
             </div>
         </div>

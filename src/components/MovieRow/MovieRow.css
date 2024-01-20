@@ -13,21 +13,23 @@
 .card {
     border: 0;
     cursor: pointer;
-    transition: all 0.5s ease-in;
+    transition: all 0.3s ease-in;
 }
 
 .card:hover {
+    z-index: 999;
     transform: scale(1.2);
 }
 
 
 .card img {
-    background-size: cover;
+    background-size: contain;
 }
 
 .card-group.card-group-scroll {
     overflow-x: scroll;
     flex-wrap: nowrap;
+    overflow-y: hidden;
 }
 
 .card-group.card-group-scroll::-webkit-scrollbar {

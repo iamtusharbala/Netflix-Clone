@@ -26,7 +26,7 @@ function Navbar() {
                 </ul>
             </div>
 
-            <div className="menu-right">
+            <div className="menu-right md-d-none lg-d-block">
                 <div className="search">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>
@@ -36,7 +36,7 @@ function Navbar() {
                 <div className="notification">
                     <FontAwesomeIcon icon={faBell} />
                 </div>
-                <div className="avatar sm-d-none lg-d-block">
+                <div className="avatar">
                     <img src={avatar} alt="Netflix Avatar" className='pe-2' /><FontAwesomeIcon icon={faCaretDown} />
                 </div>
             </div>

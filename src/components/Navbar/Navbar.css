@@ -1,12 +1,12 @@
 .navbar {
-    z-index: 699;
+    z-index: 99;
     position: relative;
 }
 
 
 
 .menu-links li {
-    margin: 0 2rem;
+    margin: 0 1rem;
 }
 
 
@@ -14,6 +14,7 @@
     color: #fff;
     text-decoration: none;
 }
+
 
 .menu-links li a:hover {
     text-decoration: underline;
