@@ -7,6 +7,7 @@ export const sciFiMovies = 'with_genres=878';
 export const thrillerMovies = 'with_genres=53';
 export const horrorMovies = 'with_genres=27';
 export const fantasyMovies = 'with_genres=14';
+export const animationMovies = 'with_genres=16';
 export const harryPotterMovies = 'search/movie?query=harry%20potter&include_adult=false&language=en-US&page=1';
 export const searchMovies = 'search/movie';
 export const trending = 'trending/movie/day'

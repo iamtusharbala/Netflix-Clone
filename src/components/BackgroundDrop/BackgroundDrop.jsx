@@ -4,7 +4,7 @@ import BackdropText from '../BackdropText/BackdropText'
 import MovieRow from '../MovieRow/MovieRow'
 import axios from '../../constants/axios'
 import { API_KEY, IMAGE_URL } from '../../constants/constants'
-import { actionMovies, fantasyMovies, genresUrl, harryPotterMovies, horrorMovies, popularMovies, popularTV, sciFiMovies, searchMovies, thrillerMovies, topRated, trending } from '../../constants/urls';
+import { actionMovies, animationMovies, fantasyMovies, genresUrl, harryPotterMovies, horrorMovies, popularMovies, popularTV, sciFiMovies, searchMovies, thrillerMovies, topRated, trending } from '../../constants/urls';
 
 function BackgroundDrop() {
     const [movie, setMovie] = useState();
@@ -26,6 +26,7 @@ function BackgroundDrop() {
                     <MovieRow title={movie && "From The Harry Potter Universe"} endpoint={searchMovies} genres="query=harry%20potter" />
                     <MovieRow title={movie && "Action Movies"} endpoint={genresUrl} genres={actionMovies} />
                     <MovieRow title={movie && "Sci-Fi Movies"} endpoint={genresUrl} genres={sciFiMovies} />
+                    <MovieRow title={movie && "Animation Movies"} endpoint={genresUrl} genres={animationMovies} />
                     <MovieRow title={movie && "Thriller Movies"} endpoint={genresUrl} genres={thrillerMovies} />
                     <MovieRow title={movie && "Horror Movies"} endpoint={genresUrl} genres={horrorMovies} />
                     <MovieRow title={movie && "Fantasy Movies"} endpoint={genresUrl} genres={fantasyMovies} />
