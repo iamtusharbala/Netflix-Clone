@@ -179,7 +179,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                                     <li className="list-group-item text-start">
                                                         <div className="col-lg-5">
                                                             <div className="episode-number mx-3">
-                                                                <h1 className='mb-0'>{episode.episode_number}</h1>
+                                                                <h2 className='mb-0'>{episode.episode_number}</h2>
                                                             </div>
                                                             {episode.still_path ?
                                                                 <div className="video-thumbnail">
