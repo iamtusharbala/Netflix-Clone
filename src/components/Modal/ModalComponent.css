@@ -52,6 +52,7 @@
     height: 100%;
     cursor: pointer;
     transition: 0.3s all ease;
+    background-size: cover;
 }
 
 .video-thumbnail img:hover {

@@ -153,8 +153,8 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                     {/* check if is a movie or series */}
                     {movieOrSeries === 'tv' &&
                         <div className="tv-series mt-3">
-                            <div className="main-head d-flex justify-content-between">
-                                <h4 className='heading'>Episodes</h4>
+                            <div className="main-head d-flex justify-content-between mb-5">
+                                <h4 className='heading mb-0'>Episodes</h4>
                                 <div className="dropdown" data-bs-theme="dark" >
                                     <a className="btn btn-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Season {season}
