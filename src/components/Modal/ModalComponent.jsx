@@ -17,6 +17,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
     const [tvSeasons, setTvSeasons] = useState({})
     const [season, setSeason] = useState(1);
     const [noOfSeasons, setNoOfSeasons] = useState(1);
+    const [credits, setCredits] = useState('');
 
     // Fetch TV episodes
     const fetchTVEpisodes = async (season = 1) => {
@@ -33,6 +34,28 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
         }
     }
 
+
+    //Faetc cast & crew
+    const fetchCredits = async () => {
+        if (movieOrSeries === 'tv') {
+            try {
+                const response5 = await axios.get(`tv/${movieDetails.id}/credits?api_key=${API_KEY}`);
+                const creditsData = response5.data;
+                setCredits(creditsData)
+
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            try {
+                const response5 = await axios.get(`movie/${movieDetails.id}/credits?api_key=${API_KEY}`);
+                const creditsData = response5.data;
+                setCredits(creditsData)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
 
     //Fetch TV seasons
     const fetchTVSeasons = async () => {
@@ -52,6 +75,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
         try {
             axios.get(`${movieOrSeries}/${movieDetails.id}?api_key=${API_KEY}`).then((response) => {
                 setDetails(response.data)
+                fetchCredits();
                 if (movieOrSeries === 'tv') {
                     fetchTVEpisodes()
                 }
@@ -99,7 +123,27 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                         </div>
                         <div className="col-md-4">
                             <div className="title">
-                                <p>Cast: Tushar Balakrishnan</p>
+                                <p>Cast:&nbsp;
+                                    <span>
+                                        {credits.cast && credits.cast.slice(0, 3).map((obj, index) => (
+                                            <React.Fragment key={obj.id}>
+                                                <span>{obj.original_name}</span>
+                                                {index < 2 ? <span>, </span> : <span>. </span>}
+                                            </React.Fragment>
+                                        ))}
+                                    </span>
+                                </p>
+                                <p>Director:&nbsp;
+                                    <span>
+                                        {credits.crew &&
+                                            credits.crew
+                                                .filter(crewMember => crewMember.job === 'Director')
+                                                .map(director => (
+                                                    <span key={director.id}>{director.name}</span>
+                                                ))}
+                                    </span>
+
+                                </p>
                             </div>
                         </div>
                     </div>
