@@ -172,12 +172,12 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                 <ul className="list-group">
                                     {Object.keys(tvEpisodes).map((key, index) => {
                                         const episode = tvEpisodes[key];
-                                        // Check if episode.overview is present
-                                        if (episode && episode.overview) {
+                                        // Check if episode.title is present
+                                        if (episode && episode.name) {
                                             return (
                                                 <React.Fragment key={index}>
-                                                    <li className="list-group-item">
-                                                        <div className="col-lg-4">
+                                                    <li className="list-group-item text-start">
+                                                        <div className="col-lg-5">
                                                             <div className="episode-number mx-3">
                                                                 <h1 className='mb-0'>{episode.episode_number}</h1>
                                                             </div>
@@ -188,7 +188,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                                                     {<img src={videoUnavailable} alt={`Episode ${episode.episode_number}`} />}
                                                                 </div>}
                                                         </div>
-                                                        <div className="col-lg-8">
+                                                        <div className="col-lg-7">
                                                             <div className="episode-details mx-5">
                                                                 <div className="episode-name">
                                                                     <h4 className='mb-0'>{episode.name}</h4>
