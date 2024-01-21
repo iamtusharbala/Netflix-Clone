@@ -15,9 +15,6 @@ function BackgroundDrop() {
     useEffect(() => {
         axios.get(`${tvOrSeries[oneOrTwo]}/popular?language=en-US&page=1&api_key=${API_KEY}`).then((response) => {
             setMovie(response.data.results[randNum])
-            console.log(response.data.results[randNum]);
-            // console.log(tvOrSeries[oneOrTwo]);
-            console.log(tvOrSeries[oneOrTwo])
         })
     }, [isMovie])
     return (

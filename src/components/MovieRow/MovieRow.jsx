@@ -3,8 +3,6 @@ import axios from '../../constants/axios'
 import { API_KEY, IMAGE_URL } from '../../constants/constants'
 import './MovieRow.css'
 import ModalComponent from '../Modal/ModalComponent';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 function MovieRow({ title, endpoint, genres = '' }) {
     const [poster, setPoster] = useState([]);

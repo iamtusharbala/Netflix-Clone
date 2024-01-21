@@ -7,29 +7,25 @@ import './ModalComponent.css'
 import axios from '../../constants/axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import videoThumb from '../../assets/images.jpeg'
+import videoUnavailable from '../../assets/video-unavailable.png'
 
 function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-
-    console.log(movieOrSeries);
-
     const [details, setDetails] = useState({})
     const [tvEpisodes, setTvEpisodes] = useState({})
     const [tvSeasons, setTvSeasons] = useState({})
-
-
+    const [season, setSeason] = useState(1);
+    const [noOfSeasons, setNoOfSeasons] = useState(1);
 
     // Fetch TV episodes
-    const fetchTVEpisodes = async () => {
+    const fetchTVEpisodes = async (season = 1) => {
         if (movieOrSeries === 'tv') {
             try {
-                const response3 = await axios.get(`tv/${movieDetails.id}/season/1?api_key=${API_KEY}`);
+                const response3 = await axios.get(`tv/${movieDetails.id}/season/${season}?api_key=${API_KEY}`);
                 const episodeDetails = await response3.data
                 setTvEpisodes(episodeDetails.episodes)
-                // console.log(episodeDetails);
-                console.log(`tv/${movieDetails.id}/season/1?api_key=${API_KEY}`);
+                setSeason(season)
                 fetchTVSeasons();
             } catch (error) {
                 console.log(error);
@@ -44,10 +40,8 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
             try {
                 const response3 = await axios.get(`tv/${movieDetails.id}?api_key=${API_KEY}`);
                 const seasonDetails = await response3.data
-                setTvSeasons(seasonDetails.seasons.length - 1)
-                console.log((seasonDetails.seasons.length) - 1) //get total seasons
-                console.log(seasonDetails.seasons);
-                console.log(`tv/${movieDetails.id}?api_key=${API_KEY}`);
+                setTvSeasons(seasonDetails.seasons)
+                setNoOfSeasons(seasonDetails.number_of_seasons)
             } catch (error) {
                 console.log(error);
             }
@@ -66,8 +60,12 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
             console.log(error);
         }
     }, [])
-    const releaseYear = details && details.release_date ? details.release_date.substring(0, 4) : '';
-
+    // console.log(details);
+    const releaseYear = details && details.release_date
+        ? details.release_date.substring(0, 4)
+        : details && details.first_air_date
+            ? details.first_air_date.substring(0, 4)
+            : 'N/A';
     return (
         <>
             <Button variant={variant} onClick={() => setShow(true)}>
@@ -79,21 +77,21 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                 show={show}
                 onHide={handleClose}
             >
-                <div className="image-header">
+                {movieDetails && <div className="image-header">
                     <div className="image">
-                        <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid poster' />
+                        {movieDetails.backdrop_path ? <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid poster' /> : videoUnavailable}
                         <button type="button" className="btn btn-light btn-lg"><FontAwesomeIcon icon={faPlay} className='px-3' />Play</button>
                     </div>
-                </div>
+                </div>}
                 <Modal.Body>
                     <div className="row">
                         <div className="col-md-8">
                             <div className="title fs-2 mt-2 main-title">
                                 {movieDetails && movieDetails.title ? movieDetails.title : (movieDetails && movieDetails.name)}
                             </div>
-                            <div className="year-details">
-
-                                <p>{releaseYear}</p>
+                            <div className="year-details mb-3">
+                                <span className='me-3'>{releaseYear}</span>
+                                {movieOrSeries === 'tv' && <span>{noOfSeasons} Seasons</span>}
                             </div>
                             <p>
                                 {movieDetails.overview}
@@ -112,12 +110,14 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                 <h4 className='heading'>Episodes</h4>
                                 <div className="dropdown">
                                     <a className="btn btn-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Season {tvSeasons}
+                                        Season {season}
                                     </a>
                                     <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="#">Action</a></li>
-                                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                                        <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                        {Object.keys(tvSeasons).map((key, index) => (
+                                            <li key={index}>
+                                                {tvSeasons[key].season_number !== 0 && <a className="dropdown-item" href="#" onClick={() => fetchTVEpisodes(tvSeasons[key].season_number)}>Season {tvSeasons[key].season_number}</a>}
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                             </div>
@@ -125,34 +125,42 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                 <ul className="list-group">
                                     {Object.keys(tvEpisodes).map((key, index) => {
                                         const episode = tvEpisodes[key];
-                                        return (
-                                            <React.Fragment key={index}>
-                                                <li className="list-group-item">
-                                                    <div className="col-lg-4">
-                                                        {/* {console.log(episode)} */}
-                                                        <div className="episode-number mx-3">
-                                                            <h1 className='mb-0'>{episode && episode.episode_number}</h1>
-                                                        </div>
-                                                        {episode &&
-                                                            <div className="video-thumbnail">
-                                                                <img src={`${IMAGE_URL}${episode.still_path}`} />
-                                                            </div>}
-                                                    </div>
-                                                    <div className="col-lg-8">
-                                                        <div className="episode-details mx-5">
-                                                            <div className="episode-name">
-                                                                <h4 className='mb-0'>{episode && episode.name}</h4>
+                                        // Check if episode.overview is present
+                                        if (episode && episode.overview) {
+                                            return (
+                                                <React.Fragment key={index}>
+                                                    <li className="list-group-item">
+                                                        <div className="col-lg-4">
+                                                            <div className="episode-number mx-3">
+                                                                <h1 className='mb-0'>{episode.episode_number}</h1>
                                                             </div>
-                                                            <div className="episode-description">
-                                                                <p>{episode && episode.overview}</p>
+                                                            {episode.still_path ?
+                                                                <div className="video-thumbnail">
+                                                                    {<img src={`${IMAGE_URL}${episode.still_path}`} alt={`Episode ${episode.episode_number}`} />}
+                                                                </div> : <div className="video-thumbnail">
+                                                                    {<img src={videoUnavailable} alt={`Episode ${episode.episode_number}`} />}
+                                                                </div>}
+                                                        </div>
+                                                        <div className="col-lg-8">
+                                                            <div className="episode-details mx-5">
+                                                                <div className="episode-name">
+                                                                    <h4 className='mb-0'>{episode.name}</h4>
+                                                                </div>
+                                                                <div className="episode-description">
+                                                                    <p>{episode.overview}</p>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                                <hr />
-                                            </React.Fragment>
-                                        );
+                                                    </li>
+                                                    <hr />
+                                                </React.Fragment>
+                                            );
+                                        }
+
+                                        // If episode.name is not present, return null (or any fallback content)
+                                        return null;
                                     })}
+
 
                                 </ul>
                             </div>

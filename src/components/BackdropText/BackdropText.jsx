@@ -14,7 +14,6 @@ function BackdropText({ title, description, movieDetails, movieOrSeries }) {
                 <div className="description py-2">
                     <h5 className='fs-5'>{description}</h5>
                 </div>
-                {console.log(movieOrSeries)}
                 {movieDetails && <div className="description-buttons">
                     <button type="button" className="btn btn-light btn-lg"><FontAwesomeIcon icon={faPlay} className='pe-3' />Play</button>
                     <ModalComponent variant="btn btn-dark btn-lg opacity-75" movieDetails={movieDetails} movieOrSeries={movieOrSeries}><FontAwesomeIcon icon={faCircleInfo} className='pe-3' />More Info</ModalComponent>
