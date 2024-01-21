@@ -9,6 +9,7 @@ const randNum = Math.floor(Math.random() * 20);
 const oneOrTwo = Math.floor(Math.random() * 2);
 const tvOrSeries = ['tv', 'movie'];
 const isMovie = tvOrSeries[oneOrTwo];
+import netFlixSeries from '../../assets/Netflix-Series.png'
 
 function BackgroundDrop() {
     const [movie, setMovie] = useState();
@@ -26,6 +27,7 @@ function BackgroundDrop() {
                     description={movie && movie.overview}
                     movieDetails={movie && movie}
                     movieOrSeries={tvOrSeries[oneOrTwo]} />
+                {(tvOrSeries[oneOrTwo] == 'tv' && movie) && <div className='netflix-series mb-5'><img src={netFlixSeries} alt="netflix-series" /></div>}
                 <div className="originals mt-5">
                     <MovieRow title={movie && "Trending Now"} endpoint={trending} />
                     <MovieRow title={movie && "Top Rated Movies"} endpoint={topRated} />
@@ -40,7 +42,7 @@ function BackgroundDrop() {
                     <MovieRow title={movie && "Popular Movies"} endpoint={genresUrl} genres={popularMovies} />
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 // backdrop_path
