@@ -122,27 +122,30 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                             </p>
                         </div>
                         <div className="col-md-4">
-                            <div className="title">
-                                <p>Cast:&nbsp;
+                            <div className="title mt-2">
+                                <p className='mb-1'>
                                     <span>
-                                        {credits.cast && credits.cast.slice(0, 3).map((obj, index) => (
+                                        {credits.cast && credits.cast.slice(0, 3).map((obj, index, array) => (
                                             <React.Fragment key={obj.id}>
+                                                <span>Cast:&nbsp;</span>
                                                 <span>{obj.original_name}</span>
-                                                {index < 2 ? <span>, </span> : <span>. </span>}
+                                                {index < array.length - 1 ? <span>, </span> : <span>. </span>}
                                             </React.Fragment>
                                         ))}
                                     </span>
                                 </p>
-                                <p>Director:&nbsp;
+                                <p>
                                     <span>
                                         {credits.crew &&
                                             credits.crew
                                                 .filter(crewMember => crewMember.job === 'Director')
                                                 .map(director => (
-                                                    <span key={director.id}>{director.name}</span>
+                                                    <React.Fragment key={director.id}>
+                                                        <span>Director:&nbsp;</span>
+                                                        <span>{director.name}</span>
+                                                    </React.Fragment>
                                                 ))}
                                     </span>
-
                                 </p>
                             </div>
                         </div>
