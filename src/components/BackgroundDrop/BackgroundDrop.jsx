@@ -1,33 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import './BackgroundDrop.css'
-import BackdropText from '../BackdropText/BackdropText'
-import MovieRow from '../MovieRow/MovieRow'
-import axios from '../../constants/axios'
-import { API_KEY, IMAGE_URL } from '../../constants/constants'
+import React, { useEffect, useState } from 'react';
+import './BackgroundDrop.css';
+import BackdropText from '../BackdropText/BackdropText';
+import MovieRow from '../MovieRow/MovieRow';
+import axios from '../../constants/axios';
+import { API_KEY, IMAGE_URL } from '../../constants/constants';
 import { actionMovies, animationMovies, fantasyMovies, genresUrl, horrorMovies, popularMovies, popularTV, sciFiMovies, searchMovies, thrillerMovies, topRated, trending } from '../../constants/urls';
-const randNum = Math.floor(Math.random() * 20);
-const oneOrTwo = Math.floor(Math.random() * 2);
+import netFlixSeries from '../../assets/Netflix-Series.png';
+
+const getRandomNumber = (max) => Math.floor(Math.random() * max);
+const oneOrTwo = getRandomNumber(2);
 const tvOrSeries = ['tv', 'movie'];
-const isMovie = tvOrSeries[oneOrTwo];
-import netFlixSeries from '../../assets/Netflix-Series.png'
 
 function BackgroundDrop() {
     const [movie, setMovie] = useState();
+
     useEffect(() => {
-        axios.get(`${tvOrSeries[oneOrTwo]}/popular?language=en-US&page=1&api_key=${API_KEY}`).then((response) => {
-            setMovie(response.data.results[randNum])
-        })
-    }, [isMovie])
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${tvOrSeries[oneOrTwo]}/popular?language=en-US&page=1&api_key=${API_KEY}`);
+                setMovie(response.data.results[getRandomNumber(20)]);
+            } catch (error) {
+                console.error('Error fetching movie:', error);
+            }
+        };
+
+        fetchData();
+    }, [tvOrSeries[oneOrTwo]]);
+
     return (
         <div className='backgroundDrop'>
-            <div className='background' style={{ backgroundImage: `url(${movie ? IMAGE_URL + movie.backdrop_path : ""})` }}></div>
+            <div className='background' style={{ backgroundImage: `url(${movie ? IMAGE_URL + movie.backdrop_path : ''})` }}></div>
             <div className="container-fluid">
                 <BackdropText
-                    title={movie && movie.title ? movie.title : (movie && movie.name)}
+                    title={movie && (movie.title || movie.name)}
                     description={movie && movie.overview}
-                    movieDetails={movie && movie}
-                    movieOrSeries={tvOrSeries[oneOrTwo]} />
-                {(tvOrSeries[oneOrTwo] == 'tv' && movie) && <div className='netflix-series mb-5'><img src={netFlixSeries} alt="netflix-series" /></div>}
+                    movieDetails={movie}
+                    movieOrSeries={tvOrSeries[oneOrTwo]}
+                />
+                {tvOrSeries[oneOrTwo] === 'tv' && movie && <div className='netflix-series mb-5'><img src={netFlixSeries} alt="netflix-series" /></div>}
                 <div className="originals mt-5">
                     <MovieRow title={movie && "Trending Now"} endpoint={trending} />
                     <MovieRow title={movie && "Top Rated Movies"} endpoint={topRated} />
@@ -42,8 +52,8 @@ function BackgroundDrop() {
                     <MovieRow title={movie && "Popular Movies"} endpoint={genresUrl} genres={popularMovies} />
                 </div>
             </div>
-        </div >
-    )
+        </div>
+    );
 }
-// backdrop_path
-export default BackgroundDrop
+
+export default BackgroundDrop;

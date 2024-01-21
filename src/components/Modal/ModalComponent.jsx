@@ -127,7 +127,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                     <span>
                                         {credits.cast && credits.cast.slice(0, 3).map((obj, index, array) => (
                                             <React.Fragment key={obj.id}>
-                                                <span>Cast:&nbsp;</span>
+                                                {index === 0 && <span>Cast:&nbsp;</span>}
                                                 <span>{obj.original_name}</span>
                                                 {index < array.length - 1 ? <span>, </span> : <span>. </span>}
                                             </React.Fragment>
