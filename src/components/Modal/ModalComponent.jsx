@@ -18,11 +18,9 @@ function ModalComponent({ variant, children, movieDetails }) {
     const fetchImdbData = async (passData) => {
         const response2 = await axios.get(`find/${passData.imdb_id}?external_source=imdb_id&api_key=${API_KEY}`);
         const detailsFromImdb = response2.data;
-        console.log(detailsFromImdb);
+        // console.log(detailsFromImdb);
         setImdbDetails(detailsFromImdb)
-
     }
-
 
     useEffect(() => {
         axios.get(`/movie/${movieDetails.id}?api_key=${API_KEY}`).then((response) => {
@@ -42,12 +40,6 @@ function ModalComponent({ variant, children, movieDetails }) {
                 show={show}
                 onHide={handleClose}
             >
-
-                <Modal.Header>
-                    {/* <Modal.Title id="example-custom-modal-styling-title">
-                        {movieDetails.title}
-                    </Modal.Title> */}
-                </Modal.Header>
                 <div className="image-header">
                     <div className="image">
                         <img src={`${IMAGE_URL}${movieDetails.backdrop_path}`} className='img-fluid poster' />
@@ -57,7 +49,7 @@ function ModalComponent({ variant, children, movieDetails }) {
                 <Modal.Body>
                     <div className="row">
                         <div className="col-md-8">
-                            <div className="title fs-2 my-2">
+                            <div className="title fs-2 mt-2">
                                 {movieDetails.title}
                             </div>
                             <div className="year-details">
