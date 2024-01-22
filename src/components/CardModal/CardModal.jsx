@@ -1,104 +1,11 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { API_KEY, IMAGE_URL } from '../../constants/constants'
-import './ModalComponent.css'
-import axios from '../../constants/axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import videoUnavailable from '../../assets/video-unavailable.png'
+import React from 'react'
+import './CardModal.css'
 
-function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const [details, setDetails] = useState({})
-    const [tvEpisodes, setTvEpisodes] = useState({})
-    const [tvSeasons, setTvSeasons] = useState({})
-    const [season, setSeason] = useState(1);
-    const [noOfSeasons, setNoOfSeasons] = useState(1);
-    const [credits, setCredits] = useState('');
-
-    // Fetch TV episodes
-    const fetchTVEpisodes = async (season = 1) => {
-        if (movieOrSeries === 'tv') {
-            try {
-                const response3 = await axios.get(`tv/${movieDetails.id}/season/${season}?api_key=${API_KEY}`);
-                const episodeDetails = await response3.data
-                setTvEpisodes(episodeDetails.episodes)
-                setSeason(season)
-                fetchTVSeasons();
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-
-
-    //Faetc cast & crew
-    const fetchCredits = async () => {
-        if (movieOrSeries === 'tv') {
-            try {
-                const response5 = await axios.get(`tv/${movieDetails.id}/credits?api_key=${API_KEY}`);
-                const creditsData = response5.data;
-                setCredits(creditsData)
-
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            try {
-                const response5 = await axios.get(`movie/${movieDetails.id}/credits?api_key=${API_KEY}`);
-                const creditsData = response5.data;
-                setCredits(creditsData)
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-
-    //Fetch TV seasons
-    const fetchTVSeasons = async () => {
-        if (movieOrSeries === 'tv') {
-            try {
-                const response3 = await axios.get(`tv/${movieDetails.id}?api_key=${API_KEY}`);
-                const seasonDetails = await response3.data
-                setTvSeasons(seasonDetails.seasons)
-                setNoOfSeasons(seasonDetails.number_of_seasons)
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
-
-    useEffect(() => {
-        console.log("movieOrSeries:", movieOrSeries);
-        console.log("movieDetails:", movieDetails);
-        try {
-            const apiUrl = `${movieOrSeries || 'tv'}/${movieDetails.id}?api_key=${API_KEY}`;
-            axios.get(apiUrl).then((response) => {
-                setDetails(response.data);
-                fetchCredits();
-                if (movieOrSeries === 'tv') {
-                    fetchTVEpisodes();
-                }
-            });
-        } catch (error) {
-            console.log(error);
-        }
-
-    }, [movieDetails, movieOrSeries])
-    // console.log(details);
-    const releaseYear = details && details.release_date
-        ? details.release_date.substring(0, 4)
-        : details && details.first_air_date
-            ? details.first_air_date.substring(0, 4)
-            : 'N/A';
+function CardModal() {
     return (
-        <>
-            {variant && <Button variant={variant} onClick={() => setShow(true)}>
-                {children}
-            </Button>}
+        <><Button variant={variant} onClick={() => setShow(true)}>
+            {children}
+        </Button>
 
             <Modal
                 size="lg"
@@ -222,4 +129,4 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
     )
 }
 
-export default ModalComponent
+export default CardModal
