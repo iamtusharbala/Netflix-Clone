@@ -27,6 +27,7 @@
 .card img {
     background-size: cover;
     min-height: 18rem;
+    min-width: 12rem;
 }
 
 .card-group.card-group-scroll {

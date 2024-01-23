@@ -4,13 +4,13 @@
 }
 
 
-
 .menu-links li {
     margin: 0 1rem;
 }
 
 
 .menu-links li a {
+    display: inline-block;
     color: #fff;
     text-decoration: none;
 }
