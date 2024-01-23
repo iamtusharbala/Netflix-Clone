@@ -10,6 +10,7 @@ function BackdropText({ logo, title, description, movieDetails, movieOrSeries })
     const handleImageLoad = () => {
         setImageLoaded(true);
 
+
     };
     return (
         <div className="backdroptext text mb-5 row">
