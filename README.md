@@ -1,8 +1,9 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Netflix Clone in React
 
-Currently, two official plugins are available:
+Indulge in cinematic wonders with my React-based Netflix clone, powered by the swift Vite build tool. Meticulously designed using npm modules like Axios, React-Bootstrap, and Font Awesome, the interface promises both elegance and functionality. Real-time movie details from the TMDB API enhance the experience, implemented seamlessly with React hooks like useState and useEffect. Dive into the magic on GitHub for collaborative exploration, where every movie night becomes an adventure.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Demo
+
+https://iamtusharbala-netflix-clone.netlify.app/
