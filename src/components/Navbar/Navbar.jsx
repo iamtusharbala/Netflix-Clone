@@ -26,7 +26,7 @@ function Navbar() {
                 </ul>
             </div>
 
-            <div className="menu-right md-d-none lg-d-block">
+            <div className="menu-right d-none d-md-none d-lg-flex">
                 <div className="search">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>
