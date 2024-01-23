@@ -26,3 +26,5 @@ dist-ssr
 
 # 
 src/constants/constants.js
+# Local Netlify folder
+.netlify

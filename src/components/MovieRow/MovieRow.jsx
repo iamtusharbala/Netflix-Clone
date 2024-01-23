@@ -53,16 +53,6 @@ function MovieRow({ title, endpoint, genres = '' }) {
                         <div className="card border-radius-0" onClick={() => handleCardClick(obj, index)}>
                             <img src={`${IMAGE_URL + obj.poster_path}`} className="img-fluid" alt={obj.title || obj.name} />
                         </div>
-
-                        {/* Render ModalComponent conditionally based on the modalStates */}
-                        {/* {modalStates[index] && (
-                            <ModalComponent
-                                key={`modal-${index}`}
-                                movieDetails={obj}
-                                movieOrSeries={obj.media_type}
-                                onClose={() => handleCloseModal(index)}
-                            />
-                        )} */}
                     </React.Fragment>
                 ))}
             </div>

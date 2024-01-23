@@ -12,6 +12,10 @@
     top: 35rem;
 }
 
+.row-card {
+    overflow-y: hidden;
+}
+
 
 .background::after {
     content: '';
