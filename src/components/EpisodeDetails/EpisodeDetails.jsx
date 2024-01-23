@@ -4,7 +4,6 @@ import { IMAGE_URL } from '../../constants/constants'
 import videoUnavailable from '../../assets/video-unavailable.png'
 
 function EpisodeDetails({ episode, index }) {
-    console.log(episode);
     return (
         <React.Fragment key={index}>
             <li className="list-group-item text-start">

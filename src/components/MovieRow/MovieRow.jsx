@@ -55,14 +55,14 @@ function MovieRow({ title, endpoint, genres = '' }) {
                         </div>
 
                         {/* Render ModalComponent conditionally based on the modalStates */}
-                        {modalStates[index] && (
+                        {/* {modalStates[index] && (
                             <ModalComponent
                                 key={`modal-${index}`}
                                 movieDetails={obj}
                                 movieOrSeries={obj.media_type}
                                 onClose={() => handleCloseModal(index)}
                             />
-                        )}
+                        )} */}
                     </React.Fragment>
                 ))}
             </div>
