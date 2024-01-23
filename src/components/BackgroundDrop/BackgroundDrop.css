@@ -16,11 +16,12 @@
 
 .netflix-series img {
     width: 8rem;
+    max-width: 100%;
 }
 
 .originals {
     position: relative;
-    top: 28rem;
+    top: 35rem;
 }
 
 
