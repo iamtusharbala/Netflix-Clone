@@ -7,18 +7,6 @@
     top: 0;
 }
 
-.netflix-series {
-    position: absolute;
-    margin-left: 3.25rem;
-    z-index: 1;
-    top: calc(100vh/5);
-}
-
-.netflix-series img {
-    width: 8rem;
-    max-width: 100%;
-}
-
 .originals {
     position: relative;
     top: 35rem;

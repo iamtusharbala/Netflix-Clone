@@ -11,8 +11,21 @@
 .backdroptext {
     margin-left: 2rem;
     z-index: 799;
+    position: absolute;
+    top: 20%;
 }
 
+
+.netflix-series {
+    position: absolute;
+    z-index: 1;
+}
+
+.netflix-series img {
+    width: 8rem;
+    max-width: 100%;
+    object-fit: contain
+}
 
 .description-buttons {
     display: flex;
@@ -21,5 +34,6 @@
 
 .name-logo {
     width: 35%;
-    max-height: 40%;
+    max-height: 14rem;
+    object-fit: contain;
 }

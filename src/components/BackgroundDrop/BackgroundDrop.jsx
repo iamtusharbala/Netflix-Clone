@@ -5,7 +5,6 @@ import MovieRow from '../MovieRow/MovieRow';
 import axios from '../../constants/axios';
 import { API_KEY, IMAGE_URL, BASE_URL } from '../../constants/constants';
 import { actionMovies, animationMovies, fantasyMovies, genresUrl, horrorMovies, popularMovies, popularTV, sciFiMovies, searchMovies, thrillerMovies, topRated, trending } from '../../constants/urls';
-import netFlixSeries from '../../assets/Netflix-Series.png';
 
 const getRandomNumber = (max) => Math.floor(Math.random() * max);
 const oneOrTwo = getRandomNumber(2);
@@ -71,7 +70,6 @@ function BackgroundDrop() {
                         movieOrSeries={tvOrSeries[oneOrTwo]}
                     />
                 </div>
-                {tvOrSeries[oneOrTwo] === 'tv' && movie && <div className='netflix-series mb-5'><img src={netFlixSeries} alt="netflix-series" /></div>}
                 <div className="row-card">
                     <div className="originals mt-5">
                         <MovieRow title={movie && "Trending Now"} endpoint={trending} />
