@@ -19,6 +19,7 @@
     gap: 1rem;
 }
 
-/* .description-buttons buttons {
-    margin: 0 2rem;
-} */
+.name-logo {
+    width: 35%;
+    max-height: 40%;
+}

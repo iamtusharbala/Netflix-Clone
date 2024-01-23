@@ -91,6 +91,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
         : details && details.first_air_date
             ? details.first_air_date.substring(0, 4)
             : 'N/A';
+    console.log(details)
     return (
         <>
             <Button variant={variant} onClick={() => setShow(true)}>
