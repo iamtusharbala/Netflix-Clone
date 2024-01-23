@@ -1,0 +1,29 @@
+.list-group-item {
+    max-height: 10rem;
+    overflow: hidden;
+}
+
+.episode-description p {
+    margin: 0;
+}
+
+
+.video-thumbnail img {
+    width: 15rem;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.3s all ease;
+    background-size: cover;
+}
+
+.video-thumbnail img:hover {
+    transform: scale(1.125);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.9));
+}
+
+.episode-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

@@ -8,6 +8,7 @@ import axios from '../../constants/axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import videoUnavailable from '../../assets/video-unavailable.png'
+import EpisodeDetails from '../EpisodeDetails/EpisodeDetails';
 
 function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
     const [show, setShow] = useState(false);
@@ -175,39 +176,12 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                         // Check if episode.title is present
                                         if (episode && episode.name) {
                                             return (
-                                                <React.Fragment key={index}>
-                                                    <li className="list-group-item text-start">
-                                                        <div className="col-lg-5">
-                                                            <div className="episode-number mx-3">
-                                                                <h2 className='mb-0'>{episode.episode_number}</h2>
-                                                            </div>
-                                                            {episode.still_path ?
-                                                                <div className="video-thumbnail">
-                                                                    {<img src={`${IMAGE_URL}${episode.still_path}`} alt={`Episode ${episode.episode_number}`} />}
-                                                                </div> : <div className="video-thumbnail">
-                                                                    {<img src={videoUnavailable} alt={`Episode ${episode.episode_number}`} />}
-                                                                </div>}
-                                                        </div>
-                                                        <div className="col-lg-7">
-                                                            <div className="episode-details mx-5">
-                                                                <div className="episode-name">
-                                                                    <h4 className='mb-0'>{episode.name}</h4>
-                                                                </div>
-                                                                <div className="episode-description">
-                                                                    <p>{episode.overview}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <hr />
-                                                </React.Fragment>
+                                                <EpisodeDetails episode={episode} index={index} />
                                             );
                                         }
-
                                         // If episode.name is not present, return null (or any fallback content)
                                         return null;
                                     })}
-
 
                                 </ul>
                             </div>
