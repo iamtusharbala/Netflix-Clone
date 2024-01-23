@@ -55,3 +55,14 @@
 .card-group.card-group-scroll>.card {
     flex-basis: 12rem;
 }
+
+@media (max-width:578px) {
+    .card-group.card-group-scroll .card {
+        min-width: 12rem;
+    }
+
+    .movierow,
+    .backdroptext {
+        margin-left: 0;
+    }
+}
