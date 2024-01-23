@@ -95,6 +95,7 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
         : details && details.first_air_date
             ? details.first_air_date.substring(0, 4)
             : 'N/A';
+    console.log(details)
     return (
         <>
             {variant && <Button variant={variant} onClick={() => setShow(true)}>
@@ -186,7 +187,6 @@ function ModalComponent({ variant, children, movieDetails, movieOrSeries }) {
                                         // If episode.name is not present, return null (or any fallback content)
                                         return null;
                                     })}
-
 
                                 </ul>
                             </div>
