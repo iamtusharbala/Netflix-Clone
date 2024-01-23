@@ -65,4 +65,16 @@
     .backdroptext {
         margin-left: 0;
     }
+
+}
+
+
+@media(max-width:965px) {
+    .card {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
 }
