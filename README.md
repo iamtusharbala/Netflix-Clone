@@ -6,4 +6,5 @@ Indulge in cinematic wonders with my React-based Netflix clone, powered by the s
 
 ## Demo
 
-https://iamtusharbala-netflix-clone.netlify.app/
+https://iamtusharbala-netflix-clone.netlify.app/ 
+(Link expired)
